@@ -36,13 +36,13 @@
 
 extern char **environ;
 
+
 /**
  * struct liststr - singly linked list
  * @num: the number field
  * @str: a string
  * @next: points to the next node
  */
-
 typedef struct liststr
 {
 	int num;
@@ -52,7 +52,7 @@ typedef struct liststr
 
 /**
  *struct passinfo - contains pseudo-arguements to pass into a function,
- *		allowing uniform prototype for function pointer struct
+ * 		allowing uniform prototype for function pointer struct
  *@arg: a string generated from getline containing arguements
  *@argv: an array of strings generated from arg
  *@path: a string path for the current command
@@ -80,31 +80,36 @@ typedef struct passinfo
 	int argc;
 	unsigned int line_count;
 	int err_num;
-	int linecount_flag;	
+	int linecount_flag;
 	char *fname;
-	list_t *env;									list_t *history;
+	list_t *env;
+	list_t *history;
 	list_t *alias;
-	char **environ;									int env_changed;
-	int status;									char **cmd_buf; /* pointer to cmd ; chain buffer, for memory mangement*/
-	int cmd_buf_type; /* CMD_type ||, &&, ; */					int readfd;	
+	char **environ;
+	int env_changed;
+	int status;
+
+	char **cmd_buf; /* pointer to cmd ; chain buffer, for memory mangement */
+	int cmd_buf_type; /* CMD_type ||, &&, ; */
+	int readfd;
 	int histcount;
 } info_t;
 
 #define INFO_INIT \
 {NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
-		0, 0, 0}
+	0, 0, 0}
 
 /**
-*struct builtin - contains a builtin string and related function
-*@type: the builtin command flag
-*@func: the function
-*/
+ *struct builtin - contains a builtin string and related function
+ *@type: the builtin command flag
+ *@func: the function
+ */
 typedef struct builtin
 {
 	char *type;
 	int (*func)(info_t *);
-
 } builtin_table;
+
 
 /* toem_shloop.c */
 int hsh(info_t *, char **);
